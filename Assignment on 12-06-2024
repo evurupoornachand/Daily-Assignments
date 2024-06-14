@@ -1,0 +1,43 @@
+1.
+
+public class CompareIntegers {
+    public static void main(String[] args) {
+        int num1 = 5;
+        int num2 = 10;
+
+        if (num1 == num2) {
+            System.out.println("The two integers are equal.");
+        } else {
+            System.out.println("The two integers are not equal.");
+        }
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.
+
+public class StringComparison {
+    public static void main(String[] args) {
+        String str = "Sunita";
+        String str1 = "Sunita";
+
+        //== operator
+        boolean result = (str == str1);
+
+        //equals() method
+        boolean result1 = str.equals(str1);
+
+        // Printing the results
+        System.out.println("Using the == operator: " + result);
+        System.out.println("Using the equals() method: " + result1);
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.
+
+In Java, strings are immutable, which means that once a string object is created, its value cannot be changed.
+
+While strings themselves are immutable in Java, there are mutable alternatives available for situations where dynamic string manipulation is required.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
