@@ -1,0 +1,92 @@
+Vehicle Class
+
+package com.downcasting;
+
+public class Vehicle {
+    public void start() {
+        System.out.println("Vehicle started");
+    }
+
+    public void stop() {
+        System.out.println("Vehicle stopped");
+    }
+}
+--------------------------------------------------------------------------------
+Bus Class
+
+package com.downcasting;
+
+public class Bus extends Vehicle {
+    @Override
+    public void start() {
+        System.out.println("Bus started");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Bus stopped");
+    }
+}
+--------------------------------------------------------------------------------
+Truck Class
+
+package com.downcasting;
+
+public class Truck extends Vehicle {
+    @Override
+    public void start() {
+        System.out.println("Truck started");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Truck stopped");
+    }
+}
+--------------------------------------------------------------------------------
+Car Class
+
+package com.downcasting;
+
+public class Car extends Vehicle {
+    @Override
+    public void start() {
+        System.out.println("Car started");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Car stopped");
+    }
+
+    public void startAC() {
+        System.out.println("Car AC started");
+    }
+}
+--------------------------------------------------------------------------------
+Main Class
+
+package com.downcasting;
+
+public class Main {
+    public static void main(String[] args) {
+        Vehicle vehicle1 = new Bus();
+        Vehicle vehicle2 = new Truck();
+        Vehicle vehicle3 = new Car();
+
+        vehicle1.start();
+        vehicle1.stop();
+
+        vehicle2.start();
+        vehicle2.stop();
+
+        vehicle3.start();
+        vehicle3.stop();
+
+        if (vehicle3 instanceof Car) {
+            Car car = (Car) vehicle3;
+            car.startAC();
+        }
+    }
+}
+--------------------------------------------------------------------------------
