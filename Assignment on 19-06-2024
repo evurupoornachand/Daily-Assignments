@@ -1,0 +1,59 @@
+Abstract Class
+
+package com.bank;
+
+abstract class Bank {
+    abstract int getRateOfInterest();
+}
+
+--------------------------------------------------------------------------
+SBI
+
+package com.bank;
+
+class SBI extends Bank {
+    int getRateOfInterest() {
+        return 7;
+    }
+}
+
+--------------------------------------------------------------------------
+PNB
+
+package com.bank;
+
+class PNB extends Bank {
+    int getRateOfInterest() {
+        return 8;
+    }
+}
+
+--------------------------------------------------------------------------
+ICICI
+
+package com.bank;
+
+class ICICI extends Bank {
+    int getRateOfInterest() {
+        return 9;
+    }
+}
+
+--------------------------------------------------------------------------
+BankDemo
+
+package com.bank;
+
+public class BankDemo {
+    public static void main(String[] args) {
+        Bank bank1 = new SBI();
+        Bank bank2 = new PNB();
+        Bank bank3 = new ICICI();
+
+        System.out.println("Rate of Interest of SBI is: " + bank1.getRateOfInterest() + " %");
+        System.out.println("Rate of Interest of PNB is: " + bank2.getRateOfInterest() + " %");
+        System.out.println("Rate of Interest of ICICI is: " + bank3.getRateOfInterest() + " %");
+    }
+}
+
+--------------------------------------------------------------------------
