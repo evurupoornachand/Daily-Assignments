@@ -1,0 +1,42 @@
+Interface Animal
+public interface Animal {
+    void makeNoise();
+}
+
+--------------------------------------------------------------
+Dog class
+public class Dog implements Animal {
+    @Override
+    public void makeNoise() {
+        System.out.println("Bark...");
+    }
+}
+
+--------------------------------------------------------------
+Cat class
+
+public class Cat implements Animal {
+    @Override
+    public void makeNoise() {
+        System.out.println("Meow");
+    }
+}
+
+--------------------------------------------------------------
+Main Class
+
+public class Main {
+    public static void getNoise(Animal animal) {
+        animal.makeNoise();
+    }
+
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        Cat cat = new Cat();
+
+        getNoise(dog);
+        getNoise(cat);
+    }
+}
+
+--------------------------------------------------------------
