@@ -1,0 +1,110 @@
+Student class
+
+package com.assignments;
+
+public class Student {
+    String name;
+    int age;
+    String gender;
+    int rollNo;
+
+    
+    public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public int getAge() {
+		return age;
+	}
+
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+
+	public String getGender() {
+		return gender;
+	}
+
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+
+	public int getRollNo() {
+		return rollNo;
+	}
+
+
+	public void setRollNo(int rollNo) {
+		this.rollNo = rollNo;
+	}
+
+
+	public Student(String name, int age, String gender, int rollNo) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.rollNo = rollNo;
+    }
+
+   
+    @Override
+    public String toString() {
+        return "Name: " + name + ", Age: " + age + ", Gender: " + gender + ", Roll No: " + rollNo;
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+Collection Class
+
+package com.assignments;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+
+
+public class Collection {
+    public static void main(String[] args) {
+        ArrayList<Student> students = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+        
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Details for student " + (i + 1) + ":");
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+            System.out.print("Age: ");
+            int age = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Gender: ");
+            String gender = scanner.nextLine();
+            System.out.print("Roll No: ");
+            int rollNo = scanner.nextInt();
+            scanner.nextLine(); 
+
+           
+            Student student = new Student(name, age, gender, rollNo);
+            students.add(student);
+        }
+
+        
+        Iterator<Student> iterator = students.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        scanner.close();
+    }
+    
+}
+
+=---------------------------------------------------------------------------------------------------------------------------------
