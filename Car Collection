@@ -1,0 +1,144 @@
+Car Class
+
+package com.linkedlist;
+
+import java.util.Objects;
+
+class Car {
+    private String name;
+    private String number;
+
+    public Car(String name, String number) {
+        this.name = name;
+        this.number = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Car other = (Car) obj;
+        return Objects.equals(name, other.name) && Objects.equals(number, other.number);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, number);
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "name='" + name + '\'' +
+                ", number='" + number + '\'' +
+                '}';
+    }
+}
+---------------------------------------------------------------------------------------------------------------
+
+Car Collection
+
+package com.linkedlist;
+
+import java.util.*;
+
+class CarCollection {
+    private Set<Car> cars;
+
+    public CarCollection() {
+        cars = new HashSet<>();
+    }
+
+    public boolean addCar(Car car) {
+        return cars.add(car);
+    }
+
+    public Car findCarByName(String name) {
+        for (Car car : cars) {
+            if (car.getName().equals(name)) {
+                return car;
+            }
+        }
+        return null;
+    }
+
+    public Car findCarByNumber(String number) {
+        for (Car car : cars) {
+            if (car.getNumber().equals(number)) {
+                return car;
+            }
+        }
+        return null;
+    }
+
+    public void displayCars() {
+        for (Car car : cars) {
+            System.out.println(car);
+        }
+    }
+}
+---------------------------------------------------------------------------------------------------
+
+Main Class
+
+package com.linkedlist;
+
+import java.util.Scanner;
+
+public class Main1 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        CarCollection collection = new CarCollection();
+
+        System.out.println("Enter car details :");
+        while (true) {
+            System.out.print("Enter car name: ");
+            String name = scanner.nextLine();
+            if (name.equalsIgnoreCase("quit")) {
+                break;
+            }
+            System.out.print("Enter car number: ");
+            String number = scanner.nextLine();
+
+            Car newCar = new Car(name, number);
+            boolean added = collection.addCar(newCar);
+            if (added) {
+                System.out.println("Car added to collection.");
+            } else {
+                System.out.println("Car with the same name and number already exists in the collection. Not added.");
+            }
+            System.out.println();
+        }
+
+        System.out.println("Enter a car name to search");
+        while (true) {
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("quit")) {
+                break;
+            }
+            Car foundCar = collection.findCarByName(input);
+            if (foundCar != null) {
+                System.out.println("Car found: " + foundCar);
+            } else {
+                System.out.println("Car not found with name: " + input);
+            }
+            System.out.println();
+        }
+
+        scanner.close();
+
+        System.out.println("All cars in collection:");
+        collection.displayCars();
+    }
+}
+---------------------------------------------------------------------------------------------------------------
