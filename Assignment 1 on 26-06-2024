@@ -1,0 +1,25 @@
+MyInterfac Class
+
+package com.inter;
+
+public interface MyInterface {
+	void myMethod();
+}
+----------------------------------------------------------------------
+ 
+MainAnonyous Class
+
+package com.inter;
+
+public class MainAnonymous {
+	    public static void main(String[] args) {
+	        MyInterface obj = new MyInterface() {
+	            @Override
+	            public void myMethod() {
+	                System.out.println("This is Calling method using anonymous inner type.");
+	            }
+	        };
+	        
+	        obj.myMethod();
+	   }
+}
