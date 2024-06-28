@@ -1,0 +1,108 @@
+OldCar Class
+
+package com.car;
+
+public class OldCar {
+    private String model;
+    private int year;
+    private double price;
+
+    public OldCar(String model, int year, double price) {
+        this.model = model;
+        this.year = year;
+        this.price = price;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+
+
+---------------------------------------------------------------------------------------------
+
+ElectricCar Class
+
+package com.car;
+
+class ElectricCar {
+    private String model;
+    private int year;
+    private double price;
+
+    public ElectricCar(String model, int year, double price) {
+        this.model = model;
+        this.year = year;
+        this.price = price;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "ElectricCar{" +
+                "model='" + model + '\'' +
+                ", year=" + year +
+                ", price=" + price +
+                '}';
+    }
+}
+
+
+---------------------------------------------------------------------------------------------
+
+Main Class
+
+package com.car;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        List<OldCar> oldCars = new ArrayList<>();
+        oldCars.add(new OldCar("ModelA", 2015, 10000));
+        oldCars.add(new OldCar("ModelB", 2013, 8000));
+        oldCars.add(new OldCar("ModelC", 2016, 12000));
+
+        List<ElectricCar> electricCars = oldCars.stream()
+                .filter(car -> car.getYear() > 2014)
+                .map(car -> new ElectricCar(car.getModel(), car.getYear(), car.getPrice() * 1.2))
+                .collect(Collectors.toList());
+
+        for (ElectricCar electricCar : electricCars) {
+            System.out.println(electricCar);
+        }
+    }
+}
+
