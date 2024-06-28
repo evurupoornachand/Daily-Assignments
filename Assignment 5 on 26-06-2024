@@ -1,0 +1,44 @@
+Vehicle Class
+
+package com.vehicle;
+
+public interface Vehicle {
+	    void drive();
+}
+--------------------------------------------------------------------
+
+MyClass Class
+
+package com.vehicle;
+
+public class Myclass {
+    void myMethod(Vehicle vehicle) {
+        vehicle.drive();
+    }
+}
+--------------------------------------------------------------------
+
+Car Class
+
+package com.vehicle;
+
+public class Car implements Vehicle {
+    public void drive() {
+        System.out.println("Repairing a car");
+    }
+}
+--------------------------------------------------------------------
+
+Main Class
+
+package com.vehicle;
+
+public class Main1 {
+    public static Vehicle getVehicle() {
+        return new Car();
+    }
+    public static void main(String[] args) {
+        Vehicle vehicle = getVehicle();
+        vehicle.drive();
+    }
+}
