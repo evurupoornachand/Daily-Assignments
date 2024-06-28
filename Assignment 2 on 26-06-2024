@@ -1,0 +1,19 @@
+MyInterface Class
+
+package com.inter;
+
+public interface MyInterface {
+	void myMethod();
+}
+--------------------------------------------
+
+MainLambda Class
+
+package com.inter;
+
+public class MainLambda {
+	   public static void main(String[] args) {
+	        MyInterface obj = () -> System.out.println("This is Calling method using lambda expression.");
+	        obj.myMethod();
+	    }
+}
