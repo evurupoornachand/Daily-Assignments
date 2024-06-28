@@ -1,0 +1,57 @@
+Item Class
+
+package com.item;
+
+public class Item {
+    int year;
+    double price;
+
+    public Item(int year, double price) {
+        this.year = year;
+        this.price = price;
+    }
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	@Override
+	public String toString() {
+		return "Items [year=" + year + ", price=" + price + "]";
+	}
+}
+----------------------------------------------------------------------------------------------
+
+Main Class
+
+package com.item;
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Item> items = new ArrayList<>();
+        items.add(new Item(2023, 100.0));
+        items.add(new Item(2021, 50.0));
+        items.add(new Item(2022, 75.0));
+        items.add(new Item(2021, 25.0));
+
+        items.sort(Comparator.comparing(Item::getYear).thenComparing(Item::getPrice));
+
+        for (Item item : items) {
+            System.out.println(item);
+        }
+    }
+}
