@@ -1,0 +1,24 @@
+MyInterface Class
+
+package com.inter;
+
+public interface MyInterface {
+	void myMethod();
+}
+--------------------------------------------------
+
+MainMethodReference Class
+
+package com.inter;
+
+public class MainMethodReference {
+	public static void main(String[] args) {
+        MainMethodReference mainObj = new MainMethodReference();
+        MyInterface obj = mainObj::anotherMethod;
+        obj.myMethod();
+    }
+    
+    public void anotherMethod() {
+        System.out.println("This is Calling another method using method reference.");
+    }
+}
