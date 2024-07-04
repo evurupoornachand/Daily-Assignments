@@ -1,0 +1,34 @@
+CREATE TABLE Vehicles (
+    vid INT PRIMARY KEY,
+    name VARCHAR(100),
+    registrationNumber VARCHAR(20),
+    price DECIMAL(10, 2),
+    model VARCHAR(100),
+    manufacturing_date DATE,
+    type_of_vehicle VARCHAR(50)
+);
+________________________________________________________________________________________________________________-- Inserting 10 rows of data
+INSERT INTO Vehicles (vid, name, registrationNumber, price, model, manufacturing_date, type_of_vehicle)
+VALUES
+(1, 'Maruti Suzuki Swift', 'AP 24 AB 1234', 500000, 'Dzire Tour S', '2020-01-31', 'Sedan'),
+(2, 'Hyundai Grand i10', 'TS 08 FN 5678', 450000, 'NIOS Magna', '2023-06-15', 'Hatchback'),
+(3, 'Mahindra Bolero', 'KA 19 MH 9012', 900000, 'ZLX', '2018-09-22', 'SUV'),
+(4, 'Tata Tiago', 'MH 12 DE 3456', 425000, 'XZ+', '2022-12-01', 'Hatchback'),
+(5, 'Honda City', 'TN 07 CL 7890', 1050000, 'ZX VTEC', '2021-05-10', 'Sedan'),
+(6, 'Toyota Fortuner', 'KL 01 AY 1234', 3200000, 'Legender 4X4', '2022-02-20', 'SUV'),
+(7, 'Kia Seltos', 'GJ 05 HK 5678', 1500000, 'GTX Plus 1.4T', '2020-11-25', 'SUV'),
+(8, 'Renault Kwid', 'HR 26 PK 9012', 400000, 'RXL 1.0', '2019-07-12', 'Hatchback'),
+(9, 'Skoda Kushaq', 'MH 47 AC 3456', 1600000, 'Style TSI', '2022-04-18', 'SUV'),
+(10, 'Volkswagen Virtus', 'KA 51 CR 7890', 1450000, 'GT TSI', '2023-03-21', 'Sedan');
+__________________________________________________________________________________________________________________________________________________________
+SELECT *
+FROM Vehicles
+WHERE manufacturing_date > '2020-12-31';
+___________________________________________________________________________________________________________________________________
+SELECT *
+FROM Vehicles
+WHERE price > 1000000 AND price < 2000000;
+_____________________________________________________________________________________________________________________
+SELECT DISTINCT type_of_vehicle
+FROM Vehicles;
+_________________________________________________________________________________________________
