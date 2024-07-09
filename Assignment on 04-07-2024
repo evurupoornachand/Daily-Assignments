@@ -1,0 +1,87 @@
+** Owner table
+CREATE TABLE Owner (
+    ownerId INT PRIMARY KEY,
+    name VARCHAR(100),
+    occupation VARCHAR(100)
+);
+
+INSERT INTO Owner (ownerId, name, occupation) VALUES
+(1, 'Amit', 'Engineer'),
+(2, 'Priya', 'Doctor'),
+(3, 'Ravi', 'Teacher'),
+(4, 'Neha', 'Artist'),
+(5, 'Vijay', 'Lawyer');
+
+SELECT * FROM Owner;
+
+
+** Address table
+CREATE TABLE Address (
+    aId INT PRIMARY KEY,
+    state VARCHAR(50),
+    pincode VARCHAR(10),
+    city VARCHAR(50),
+    ownerId INT,
+    FOREIGN KEY (ownerId) REFERENCES Owner(ownerId)
+);
+
+INSERT INTO Address (aId, state, pincode, city, ownerId) VALUES
+(206, 'Kerala', '682001', 'Kochi', 1),
+(207, 'West Bengal', '700001', 'Kolkata', 2),
+(208, 'Telangana', '500001', 'Hyderabad', 3),
+(209, 'Rajasthan', '302001', 'Jaipur', 4),
+(210, 'Uttar Pradesh', '226001', 'Lucknow', 5),
+(211, 'Maharashtra', '411001', 'Pune', 1),
+(212, 'Gujarat', '380001', 'Ahmedabad', 2),
+(213, 'Tamil Nadu', '600001', 'Chennai', 3);
+
+SELECT * FROM Address;
+
+** Vehicle table
+CREATE TABLE Vehicle (
+    vId INT PRIMARY KEY,
+    mnu_date DATE,
+    type_of_vehicle VARCHAR(50),
+    price DECIMAL(10, 2),
+    model VARCHAR(50),
+    date_of_sale DATE,
+    ownerId INT,
+    FOREIGN KEY (ownerId) REFERENCES Owner(ownerId)
+);
+
+
+INSERT INTO Vehicle (vId, mnu_date, type_of_vehicle, price, model, date_of_sale, ownerId) VALUES
+(306, '2022-02-20', 'Car', 1200000.00, 'Toyota Corolla', '2023-02-15', 1),
+(307, '2021-04-25', 'Bike', 180000.00, 'Honda CB Unicorn', '2023-04-20', 2),
+(308, '2020-06-30', 'Truck', 2800000.00, 'Ashok Leyland Captain', '2023-06-25', 3),
+(309, '2019-08-05', 'SUV', 2000000.00, 'Mahindra XUV500', '2023-08-10', 4),
+(310, '2023-10-15', 'Sedan', 1300000.00, 'Hyundai Verna', '2023-10-10', 5),
+(311, '2022-03-20', 'Car', 1100000.00, 'Ford EcoSport', '2023-03-15', 1),
+(312, '2021-05-25', 'Bike', 200000.00, 'Bajaj Pulsar 150', '2023-05-20', 2),
+(313, '2020-07-30', 'Truck', 3000000.00, 'Eicher Pro 3019', '2023-07-25', 3),
+(314, '2019-09-10', 'SUV', 2200000.00, 'Ford Endeavour', '2023-09-05', 4),
+(315, '2023-11-15', 'Sedan', 1400000.00, 'Maruti Suzuki Ciaz', '2023-11-10', 5);
+
+
+SELECT * FROM Vehicle;
+
+
+** get list of owners that bought Vehicle between 1/1/2016 to 12/31/207.
+
+SELECT o.name
+FROM Owner o
+JOIN Vehicle v ON o.ownerId = v.ownerId
+WHERE v.date_of_sale BETWEEN '2016-01-01' AND '207-12-31';
+
+** get list of owners that not bought any vehicle and who are from Mumbai.
+
+SELECT o.name
+FROM Owner o
+LEFT JOIN Vehicle v ON o.ownerId = v.ownerId
+LEFT JOIN Address a ON o.ownerId = a.ownerId
+WHERE v.vId IS NULL AND a.city = 'Mumbai';
+
+** get the model that is sold in the market.
+
+SELECT DISTINCT model
+FROM Vehicle;
