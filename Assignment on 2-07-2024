@@ -1,0 +1,35 @@
+CREATE TABLE FoodItems (
+    ItemId INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(20) NOT NULL,
+    Description TEXT,
+    Ingredients TEXT,
+    Price DOUBLE NOT NULL,
+    Quantity INT NOT NULL
+);
+
+
+INSERT INTO FoodItems (Name, Description, Ingredients, Price, Quantity)
+VALUES
+('Chicken Biryani', 'Rice dish with chicken and spices', 'Rice, Chicken, Spices', 200.00, 10),
+('Paneer Butter Masala', 'Creamy tomato-based curry with paneer', 'Paneer, Tomato, Cream, Spices', 150.00, 15),
+('Masala Dosa', 'Crispy dosa filled with spiced potatoes', 'Rice, Urad Dal, Potatoes, Spices', 100.00, 20),
+('Chole Bhature', 'Spicy chickpeas served with fried bread', 'Chickpeas, Spices, Flour, Yogurt', 120.00, 12),
+('Rogan Josh', 'Rich and flavorful lamb curry', 'Lamb, Spices, Yogurt, Tomato', 250.00, 8),
+('Hyderabadi Biryani', 'Fragrant rice dish with lamb and spices', 'Rice, Lamb, Spices, Yogurt', 220.00, 10),
+('Aloo Gobi', 'Spiced potato and cauliflower curry', 'Potatoes, Cauliflower, Spices', 90.00, 25),
+('Butter Chicken', 'Creamy tomato-based chicken curry', 'Chicken, Tomato, Cream, Spices', 180.00, 15),
+('Palak Paneer', 'Spinach and cottage cheese curry', 'Spinach, Paneer, Spices, Cream', 160.00, 18),
+('Samosa', 'Fried pastry with savory filling', 'Flour, Potatoes, Peas, Spices', 50.00, 30);
+
+
+SELECT * FROM FoodItems;
+
+ALTER TABLE FoodItems
+ADD UNIQUE Food;
+
+
+SELECT Price, COUNT(*) as TotalItems
+FROM FoodItems
+GROUP BY Price
+HAVING Price >= 100
+;
