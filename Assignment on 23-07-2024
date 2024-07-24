@@ -1,0 +1,138 @@
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Collection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Car Collection</h1>
+        <button onclick="sortByPrice()">Sort by Price</button>
+        <button onclick="sortByModelYear()">Sort by Model Year</button>
+        <div id="carList"></div>
+    </div>
+    <script src="car.js"></script>
+</body>
+</html>
+----------------------------------------------------------------------------------------------------------
+
+style.css
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    display: block;
+    width: 200px;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#carList {
+    margin-top: 20px;
+}
+
+.car-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+--------------------------------------------------------------------------------------------------
+
+car.js
+
+function Car(model, price, name, registrationNo, engine, typeofCar) {
+    this.model = model;
+    this.price = price;
+    this.name = name;
+    this.registrationNo = registrationNo;
+    this.engine = engine;
+    this.typeofCar = typeofCar;
+
+    this.info = function() {
+        return `Model: ${this.model}, Price: ${this.price}, Name: ${this.name}, Registration No: ${this.registrationNo}, Engine: ${this.engine}, Type of Car: ${this.typeofCar}`;
+    };
+
+    this.getPrice = function() {
+        return this.price;
+    };
+
+    this.start = function() {
+        return `Car is starting with ${this.typeofCar}`;
+    };
+
+    this.stop = function() {
+        return `Stop ${this.typeofCar} engine`;
+    };
+
+    this.startAc = function() {
+        return `AC started in ${this.name}`;
+    };
+}
+
+let cars = [
+    new Car(2020, 20000, "Toyota Corolla", "ABC123", "1.8L", "petrol"),
+    new Car(2019, 25000, "Honda Civic", "DEF456", "2.0L", "petrol"),
+    new Car(2021, 30000, "Tesla Model 3", "GHI789", "Electric", "electric"),
+    new Car(2018, 18000, "Ford Focus", "JKL012", "2.0L", "petrol"),
+    new Car(2020, 35000, "BMW 3 Series", "MNO345", "2.0L", "diesel"),
+    new Car(2017, 15000, "Hyundai Elantra", "PQR678", "1.6L", "petrol"),
+    new Car(2019, 22000, "Mazda 3", "STU901", "2.0L", "petrol"),
+    new Car(2021, 40000, "Audi A4", "VWX234", "2.0L", "diesel"),
+    new Car(2018, 26000, "Mercedes-Benz C-Class", "YZA567", "2.0L", "diesel"),
+    new Car(2020, 32000, "Lexus IS", "BCD890", "2.0L", "petrol")
+];
+
+function displayCars(cars) {
+    const carList = document.getElementById('carList');
+    carList.innerHTML = '';
+    cars.forEach(car => {
+        const carItem = document.createElement('div');
+        carItem.className = 'car-item';
+        carItem.textContent = car.info();
+        carList.appendChild(carItem);
+    });
+}
+
+function sortByPrice() {
+    cars.sort((a, b) => a.price - b.price);
+    displayCars(cars);
+}
+
+function sortByModelYear() {
+    cars.sort((a, b) => a.model - b.model);
+    displayCars(cars);
+}
+
+const newCar = new Car(2022, 45000, "Jaguar XF", "EFG345", "2.0L", "diesel");
+console.log(newCar.startAc());
+
+displayCars(cars);
