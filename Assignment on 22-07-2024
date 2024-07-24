@@ -1,0 +1,214 @@
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button onclick="setOperation('+')">+</button>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button onclick="setOperation('-')">-</button>
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button onclick="setOperation('*')">*</button>
+            <button onclick="appendNumber('0')">0</button>
+            <button onclick="appendNumber('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="setOperation('/')">/</button>
+            <button onclick="calculatePercentage()">%</button>
+            <button onclick="calculateFactorial()">!</button>
+            <button onclick="calculateSquareRoot()">√</button>
+        </div>
+    </div>
+
+    <script src="calculator.js"></script>
+</body>
+</html>
+--------------------------------------------------------------------------------------------
+
+style.css
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.calculator {
+    width: 300px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 10px;
+}
+
+.display {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: right;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+button {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 15px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d0d0d0;
+}
+
+---------------------------------------------------------------------------------------------
+
+calculator.js
+
+const Calculator = {
+    displayValue: '0',
+    firstOperand: null,
+    waitingForSecondOperand: false,
+    operator: null,
+
+    clearDisplay: function() {
+        this.displayValue = '0';
+        this.firstOperand = null;
+        this.waitingForSecondOperand = false;
+        this.operator = null;
+        this.updateDisplay();
+    },
+
+    updateDisplay: function() {
+        const display = document.getElementById('display');
+        display.textContent = this.displayValue;
+    },
+
+    appendNumber: function(number) {
+        if (this.waitingForSecondOperand) {
+            this.displayValue = number;
+            this.waitingForSecondOperand = false;
+        } else {
+            this.displayValue = this.displayValue === '0' ? number : this.displayValue + number;
+        }
+        this.updateDisplay();
+    },
+
+    setOperation: function(op) {
+        if (this.operator !== null) {
+            this.calculate();
+        }
+        this.firstOperand = parseFloat(this.displayValue);
+        this.operator = op;
+        this.waitingForSecondOperand = true;
+    },
+
+    calculate: function() {
+        const first = parseFloat(this.firstOperand);
+        const second = parseFloat(this.displayValue);
+        let result = 0;
+
+        switch (this.operator) {
+            case '+':
+                result = first + second;
+                break;
+            case '-':
+                result = first - second;
+                break;
+            case '*':
+                result = first * second;
+                break;
+            case '/':
+                result = first / second;
+                break;
+            default:
+                return;
+        }
+
+        this.displayValue = result.toString();
+        this.operator = null;
+        this.firstOperand = null;
+        this.updateDisplay();
+    },
+
+    calculatePercentage: function() {
+        const number = parseFloat(this.displayValue);
+        const percent = number / 100;
+        this.displayValue = percent.toString();
+        this.updateDisplay();
+    },
+
+    calculateFactorial: function() {
+        const number = parseInt(this.displayValue);
+        let result = 1;
+        for (let i = 1; i <= number; i++) {
+            result *= i;
+        }
+        this.displayValue = result.toString();
+        this.updateDisplay();
+    },
+
+    calculateSquareRoot: function() {
+        const number = parseFloat(this.displayValue);
+        if (number < 0) {
+            this.displayValue = "Undefined";
+        } else {
+            this.displayValue = Math.sqrt(number).toString();
+        }
+        this.updateDisplay();
+    }
+};
+
+function initCalculator() {
+    const buttons = document.querySelectorAll('.buttons button');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            const action = this.textContent;
+            if (action === 'C') {
+                Calculator.clearDisplay();
+            } else if ('0123456789.'.includes(action)) {
+                Calculator.appendNumber(action);
+            } else if ('+-*/'.includes(action)) {
+                Calculator.setOperation(action);
+            } else if (action === '=') {
+                Calculator.calculate();
+            } else if (action === '%') {
+                Calculator.calculatePercentage();
+            } else if (action === '!') {
+                Calculator.calculateFactorial();
+            } else if (action === '√') {
+                Calculator.calculateSquareRoot();
+            }
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initCalculator);
