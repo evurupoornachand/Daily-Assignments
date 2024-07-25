@@ -1,0 +1,16 @@
+function multiply(a, b) {
+  return a * b;
+}
+
+function divide(callback, x, y, divisor) {
+  const product = callback(x, y);
+  
+  return product / divisor;
+}
+
+const a = 10;
+const b = 5;
+const divisor = 2;
+const result = divide(multiply, a, b, divisor);
+
+console.log(`Result of dividing the product of ${a} and ${b} by ${divisor} is ${result}`);
