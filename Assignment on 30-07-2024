@@ -1,0 +1,129 @@
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithms</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sorting Algorithms</h1>
+        <button onclick="sortArray('selection')">Selection Sort</button>
+        <button onclick="sortArray('bubble')">Bubble Sort</button>
+        <button onclick="sortArray('merge')">Merge Sort</button>
+        <div id="output"></div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------
+styles.css
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#output {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+--------------------------------------------------------------------------------------------
+
+scripts.js
+
+const array = [3, -1, 2, 5, -6, 0, 4, -3, 1];
+
+function sortArray(method) {
+    let sortedArray;
+    switch (method) {
+        case 'selection':
+            sortedArray = selectionSort([...array]);
+            break;
+        case 'bubble':
+            sortedArray = bubbleSort([...array]);
+            break;
+        case 'merge':
+            sortedArray = mergeSort([...array]);
+            break;
+        default:
+            sortedArray = array;
+    }
+    document.getElementById('output').innerText = `Sorted Array (${method}): ${sortedArray}`;
+}
+
+function selectionSort(arr) {
+    let n = arr.length;
+    for (let i = 0; i < n; i++) {
+        let minIdx = i;
+        for (let j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIdx]) {
+                minIdx = j;
+            }
+        }
+        [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]];
+    }
+    return arr;
+}
+
+function bubbleSort(arr) {
+    let n = arr.length;
+    for (let i = 0; i < n - 1; i++) {
+        for (let j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            }
+        }
+    }
+    return arr;
+}
+
+function mergeSort(arr) {
+    if (arr.length < 2) return arr;
+    let mid = Math.floor(arr.length / 2);
+    let left = mergeSort(arr.slice(0, mid));
+    let right = mergeSort(arr.slice(mid));
+    return merge(left, right);
+}
+
+function merge(left, right) {
+    let result = [];
+    while (left.length && right.length) {
+        if (left[0] < right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+    }
+    return result.concat(left, right);
+}
