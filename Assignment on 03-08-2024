@@ -1,0 +1,92 @@
+let data = fetch("./book.json");
+data.then(data=>{
+    // return data.json();
+     return data.json();
+}).then(data=>{
+    console.log(data);
+    loading(data);
+}).catch(err=>{
+    console.log(err)});
+
+
+
+    function loading(data){
+        let books = document.getElementById("books")
+        for(element of data){
+            let div = document.createElement("div");
+            div.setAttribute("id",bookid-${element.bookId});
+
+            // create heading
+
+            let h1 = document.createElement("h1");
+            h1.innerText=element.title;
+
+            let span1 = document.createElement("span");
+            span1.innerText = element.author;
+            
+            let span2 = document.createElement("span");
+            span2.innerText = element.price
+            
+            let span3 = document.createElement("span");
+            span3.innerText = element.year;
+            
+            let span4 = document.createElement("span");
+            span1.innerText = element.publisher;
+
+
+            let div1 = document.createElement("div")
+            div1.append(span1,span2,span3,span4);
+
+            div.append(h1,div1)
+
+            books.appendChild(div);
+
+        }
+    }
+
+
+
+async function loadata(){
+    let data = await fetch("./book.json")
+    console.log(data);
+    let json = await data.json();
+    console.log(json)
+    newload(json)
+
+}
+
+loadata();
+
+function newload(data){
+    let books = document.getElementById("books")
+    for(element of data){
+        let div = document.createElement("div");
+        div.setAttribute("id",bookid-${element.bookId});
+
+        // create heading
+
+        let h1 = document.createElement("h1");
+        h1.innerText=element.title;
+
+        let span1 = document.createElement("span");
+        span1.innerText = element.author;
+        
+        let span2 = document.createElement("span");
+        span2.innerText = element.price
+        
+        let span3 = document.createElement("span");
+        span3.innerText = element.year;
+        
+        let span4 = document.createElement("span");
+        span1.innerText = element.publisher;
+
+
+        let div1 = document.createElement("div")
+        div1.append(span1,span2,span3,span4);
+
+        div.append(h1,div1)
+
+        books.appendChild(div);
+
+    }
+}
