@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Data</h1>
+    <button id="loadDataButton">Load Student Data</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Marks</th>
+                <th>Mail</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+        <tbody id="studentTableBody">
+        </tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
+______________________________________________________________________________________________________________________________________________________
+document.addEventListener("DOMContentLoaded", function() {
+    const loadDataButton = document.getElementById('loadDataButton');
+
+    function loadStudentData() {
+        return new Promise((resolve, reject) => {
+            fetch('student.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => resolve(data))
+                .catch(error => reject(error));
+        });
+    }
+
+    function displayStudentData(students) {
+        const tableBody = document.getElementById('studentTableBody');
+        tableBody.innerHTML = ''; 
+        students.forEach(student => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${student.rollno}</td>
+                <td>${student.name}</td>
+                <td>${student.marks}</td>
+                <td>${student.email}</td>
+                <td>${student.gender}</td>
+
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    loadDataButton.addEventListener('click', function() {
+        loadStudentData()
+            .then(students => displayStudentData(students))
+            .catch(error => console.error('Error loading student data:', error));
+    });
+});
+_____________________________________________________________________________________________________________________________________________
+[
+    {
+      "name": "Aarav Sharma",
+      "rollno": 1,
+      "marks": 85,
+      "email": "aarav.sharma@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Ananya Patel",
+      "rollno": 2,
+      "marks": 92,
+      "email": "ananya.patel@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Vivaan Agarwal",
+      "rollno": 3,
+      "marks": 78,
+      "email": "vivaan.agarwal@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Diya Gupta",
+      "rollno": 4,
+      "marks": 88,
+      "email": "diya.gupta@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Ayaan Verma",
+      "rollno": 5,
+      "marks": 81,
+      "email": "ayaan.verma@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Ishaan Singh",
+      "rollno": 6,
+      "marks": 74,
+      "email": "ishaan.singh@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Saanvi Rao",
+      "rollno": 7,
+      "marks": 89,
+      "email": "saanvi.rao@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Arjun Nair",
+      "rollno": 8,
+      "marks": 95,
+      "email": "arjun.nair@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Kavya Menon",
+      "rollno": 9,
+      "marks": 87,
+      "email": "kavya.menon@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Rohan Desai",
+      "rollno": 10,
+      "marks": 90,
+      "email": "rohan.desai@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Aarohi Reddy",
+      "rollno": 11,
+      "marks": 80,
+      "email": "aarohi.reddy@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Aditya Jain",
+      "rollno": 12,
+      "marks": 77,
+      "email": "aditya.jain@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Sneha Kapoor",
+      "rollno": 13,
+      "marks": 83,
+      "email": "sneha.kapoor@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Aryan Khanna",
+      "rollno": 14,
+      "marks": 86,
+      "email": "aryan.khanna@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Nisha Bansal",
+      "rollno": 15,
+      "marks": 93,
+      "email": "nisha.bansal@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Krish Mehta",
+      "rollno": 16,
+      "marks": 72,
+      "email": "krish.mehta@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Anvi Malhotra",
+      "rollno": 17,
+      "marks": 84,
+      "email": "anvi.malhotra@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Ishika Bhatt",
+      "rollno": 18,
+      "marks": 91,
+      "email": "ishika.bhatt@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Yash Choudhary",
+      "rollno": 19,
+      "marks": 75,
+      "email": "yash.choudhary@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Pihu Sharma",
+      "rollno": 20,
+      "marks": 88,
+      "email": "pihu.sharma@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Laksh Tiwari",
+      "rollno": 21,
+      "marks": 82,
+      "email": "laksh.tiwari@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Ria Saxena",
+      "rollno": 22,
+      "marks": 79,
+      "email": "ria.saxena@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Arnav Kumar",
+      "rollno": 23,
+      "marks": 94,
+      "email": "arnav.kumar@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Mira Tripathi",
+      "rollno": 24,
+      "marks": 76,
+      "email": "mira.tripathi@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Dev Patel",
+      "rollno": 25,
+      "marks": 81,
+      "email": "dev.patel@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Ridhi Rana",
+      "rollno": 26,
+      "marks": 90,
+      "email": "ridhi.rana@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Kabir Joshi",
+      "rollno": 27,
+      "marks": 73,
+      "email": "kabir.joshi@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Simran Kaur",
+      "rollno": 28,
+      "marks": 85,
+      "email": "simran.kaur@example.com",
+      "gender": "Female"
+    },
+    {
+      "name": "Ojas Gupta",
+      "rollno": 29,
+      "marks": 92,
+      "email": "ojas.gupta@example.com",
+      "gender": "Male"
+    },
+    {
+      "name": "Tara Rai",
+      "rollno": 30,
+      "marks": 78,
+      "email": "tara.rai@example.com",
+      "gender": "Female"
+    }
+  ]
+  
